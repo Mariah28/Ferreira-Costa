@@ -1,0 +1,107 @@
+unit UnitConsulta;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
+  Vcl.WinXCalendars, Vcl.ComCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Datasnap.DBClient, Data.Win.ADODB, Vcl.Mask;
+
+type
+  TForm1 = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    CheckBox1: TCheckBox;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    EditNota: TEdit;
+    Panel2: TPanel;
+    Label11: TLabel;
+    ComboBox1: TComboBox;
+    DBGridItens: TDBGrid;
+    Conexao: TADOConnection;
+    ADOMaster: TADOQuery;
+    DSItens: TDataSource;
+    DSMaster: TDataSource;
+    DBGridMaster: TDBGrid;
+    Edit2: TEdit;
+    Panel3: TPanel;
+    Label9: TLabel;
+    Label12: TLabel;
+    Label10: TLabel;
+    ADOItens: TADOQuery;
+    ADOItensCodigoBarras: TWideStringField;
+    ADOItensProduto: TWideStringField;
+    ADOItensDescricao: TWideStringField;
+    ADOItensQtde: TIntegerField;
+    ADOItensPrecoUnit: TBCDField;
+    ADOItensPrecoTotal: TBCDField;
+    Button1: TButton;
+    ADOMasterNota: TWideStringField;
+    ADOMasterDataMovim: TDateField;
+    ADOMasterValorTotal: TBCDField;
+    ADOMasterTipo: TStringField;
+    DateTimePickerInicio: TDateTimePicker;
+    DateTimePickerFim: TDateTimePicker;
+    procedure ConsultarClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.ConsultarClick(Sender: TObject);
+var
+  Nota: string;
+  DataInicio, DataFim: TDateTime;
+begin
+  Nota := EditNota.Text;
+
+  if (DateTimePickerInicio.Date > 0) and (DateTimePickerFim.Date > 0) then
+  begin
+    DataInicio := DateTimePickerInicio.Date;
+    DataFim := DateTimePickerFim.Date;
+  end
+  else
+  begin
+    DataInicio := 0;
+    DataFim := 0;
+  end;
+
+   with ADOMaster do
+   begin
+     Close;
+     SQL.Clear;
+     SQL.Add('SELECT * FROM SFC_PEDIDO_VENDA WHERE (1 = 1)');
+
+     if Nota <> '' then
+     begin
+       SQL.Add('AND Nota LIKE :Nota');
+       Parameters.ParamByName('Nota').Value := '%' + Nota + '%';
+     end;
+
+     if (DataInicio > 0) and (DataFim > 0) then
+     begin
+       SQL.Add('AND DataMovim BETWEEN :DataInicio AND :DataFim');
+       Parameters.ParamByName('DataInicio').Value := DataInicio;
+       Parameters.ParamByName('DataFim').Value := DataFim;
+     end;
+
+     open;
+   end;
+
+
+   DBGridMaster.DataSource := DSMaster;
+end;
+
+

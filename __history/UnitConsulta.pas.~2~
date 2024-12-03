@@ -1,0 +1,55 @@
+unit UnitConsulta;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls,
+  Vcl.WinXCalendars, Vcl.ComCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Datasnap.DBClient, Data.Win.ADODB;
+
+type
+  TForm1 = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    CheckBox1: TCheckBox;
+    Edit1: TEdit;
+    Label2: TLabel;
+    Label3: TLabel;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Edit5: TEdit;
+    Label7: TLabel;
+    Label8: TLabel;
+    Edit6: TEdit;
+    Edit7: TEdit;
+    Panel2: TPanel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    ComboBox1: TComboBox;
+    DBGrid1: TDBGrid;
+    Conexao: TADOConnection;
+    ADOProduto: TADOQuery;
+    DSConsulta: TDataSource;
+    ClientDataSet1: TClientDataSet;
+    DSVenda: TDataSource;
+    DBGrid2: TDBGrid;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+end.
