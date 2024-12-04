@@ -20,11 +20,13 @@ object Form1: TForm1
     Left = 0
     Top = 105
     Width = 1109
-    Height = 144
+    Height = 115
     Align = alTop
+    Caption = 'f'
     Color = clRed
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 1107
     object Label2: TLabel
       Left = 22
       Top = 8
@@ -64,31 +66,18 @@ object Form1: TForm1
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object Label1: TLabel
-      Left = 599
-      Top = 6
-      Width = 54
-      Height = 21
-      Caption = 'Cliente'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -16
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
     object EditNota: TEdit
       Left = 509
-      Top = 39
+      Top = 43
       Width = 68
-      Height = 34
+      Height = 29
       TabOrder = 0
     end
     object BtnLimpar: TBitBtn
       Left = 758
-      Top = 88
+      Top = 24
       Width = 145
-      Height = 42
+      Height = 59
       Caption = 'Limpar (F5)'
       Glyph.Data = {
         36090000424D3609000000000000360000002800000018000000180000000100
@@ -170,9 +159,9 @@ object Form1: TForm1
     end
     object BtnConsultar: TBitBtn
       Left = 599
-      Top = 88
+      Top = 24
       Width = 153
-      Height = 42
+      Height = 59
       Caption = ' Consultar (F2)'
       Glyph.Data = {
         36090000424D3609000000000000360000002800000018000000180000000100
@@ -253,10 +242,10 @@ object Form1: TForm1
       OnClick = ConsultarClick
     end
     object BtnCancelar: TBitBtn
-      Left = 909
-      Top = 88
+      Left = 918
+      Top = 24
       Width = 145
-      Height = 42
+      Height = 59
       Caption = 'Cancelar (F3)'
       Glyph.Data = {
         36090000424D3609000000000000360000002800000018000000180000000100
@@ -336,14 +325,6 @@ object Form1: TForm1
       TabOrder = 3
       OnClick = BtnCancelarClick
     end
-    object EditCliente: TEdit
-      Left = 599
-      Top = 39
-      Width = 149
-      Height = 34
-      Hint = 'Digite o nome do cliente'
-      TabOrder = 4
-    end
   end
   object Panel2: TPanel
     Left = 0
@@ -412,9 +393,9 @@ object Form1: TForm1
   end
   object DBGridItens: TDBGrid
     Left = 0
-    Top = 408
+    Top = 384
     Width = 1109
-    Height = 174
+    Height = 198
     Align = alBottom
     DataSource = DSItens
     DrawingStyle = gdsGradient
@@ -431,7 +412,6 @@ object Form1: TForm1
         Expanded = False
         FieldName = 'Codigo'
         Title.Caption = 'C'#243'digo'
-        Width = 76
         Visible = True
       end
       item
@@ -444,7 +424,7 @@ object Form1: TForm1
         Expanded = False
         FieldName = 'Descricao'
         Title.Caption = 'Descri'#231#227'o'
-        Width = 304
+        Width = 267
         Visible = True
       end
       item
@@ -464,7 +444,6 @@ object Form1: TForm1
       item
         Expanded = False
         FieldName = 'ICMS'
-        Width = 98
         Visible = True
       end
       item
@@ -482,9 +461,9 @@ object Form1: TForm1
   end
   object DBGridMaster: TDBGrid
     Left = 0
-    Top = 249
+    Top = 220
     Width = 1109
-    Height = 159
+    Height = 164
     Align = alClient
     DataSource = DSMaster
     DrawingStyle = gdsGradient
@@ -505,12 +484,6 @@ object Form1: TForm1
     Columns = <
       item
         Expanded = False
-        FieldName = 'Loja'
-        Width = 52
-        Visible = True
-      end
-      item
-        Expanded = False
         FieldName = 'Nota'
         Visible = True
       end
@@ -523,14 +496,14 @@ object Form1: TForm1
       item
         Expanded = False
         FieldName = 'Cliente'
-        Width = 335
+        Width = 307
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'ValorTotal'
         Title.Caption = 'Valor Total'
-        Width = 142
+        Width = 122
         Visible = True
       end>
   end
@@ -645,38 +618,20 @@ object Form1: TForm1
         Precision = 10
         Size = 6
         Value = Null
-      end
-      item
-        Name = 'Cliente'
-        Attributes = [paNullable]
-        DataType = ftInteger
-        Precision = 10
-        Size = 4
-        Value = Null
-      end
-      item
-        Name = 'Cliente'
-        Attributes = [paNullable]
-        DataType = ftWideString
-        Precision = 160
-        Size = 4000
-        Value = Null
       end>
     SQL.Strings = (
       'SELECT '
       '    Nota,'
       '    DataMovim,'
       '    ValorTotal,'
-      '    Loja,'
       '    Cliente'
       'FROM '
       '    SfcPedidoVenda'
       'WHERE'
-      '     (:Nota IS NULL OR Nota LIKE :Nota) AND'
+      '    (:Nota IS NULL OR Nota LIKE :Nota) AND'
       
-        '     (:DataInicio IS NULL OR :DataFim IS NULL OR DataMovim BETWE' +
-        'EN :DataInicio AND :DataFim) AND'
-      '     (:Cliente IS NULL OR Cliente LIKE :Cliente);')
+        '    (:DataInicio IS NULL OR :DataFim IS NULL OR DataMovim BETWEE' +
+        'N :DataInicio AND :DataFim);')
     Left = 368
     Top = 16
     object ADOMasterNota: TWideStringField
@@ -690,9 +645,6 @@ object Form1: TForm1
       FieldName = 'ValorTotal'
       Precision = 12
       Size = 2
-    end
-    object ADOMasterLoja: TIntegerField
-      FieldName = 'Loja'
     end
     object ADOMasterCliente: TWideStringField
       FieldName = 'Cliente'

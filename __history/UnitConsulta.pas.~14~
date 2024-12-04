@@ -41,12 +41,9 @@ type
     BtnLimpar: TBitBtn;
     BtnConsultar: TBitBtn;
     BtnCancelar: TBitBtn;
-    EditCliente: TEdit;
-    Label1: TLabel;
     ADOMasterNota: TWideStringField;
     ADOMasterDataMovim: TDateField;
     ADOMasterValorTotal: TBCDField;
-    ADOMasterLoja: TIntegerField;
     ADOMasterCliente: TWideStringField;
     procedure ConsultarClick(Sender: TObject);
     procedure CarregarItens(Sender: TObject; Field: TField);
@@ -118,7 +115,6 @@ begin
   DBGridMaster.DataSource := nil;
 
   EditNota.Text := '';
-  EditCliente.Text := '';
   CalendarPickerInicio.Date := Now;
   CalendarPickerFim.Date := Now;
 
@@ -127,11 +123,11 @@ end;
 // Consulta registros no banco com base nos filtros fornecidos
 procedure TForm1.ConsultarClick(Sender: TObject);
 var
-  Nota, Cliente: string;
+  Nota: string;
   DataInicio, DataFim: TDateTime;
 begin
   Nota := EditNota.Text;
-  Cliente := EditCliente.Text;
+
   DataInicio := CalendarPickerInicio.Date;
   DataFim := CalendarPickerFim.Date;
 
@@ -146,7 +142,7 @@ begin
    begin
      Close;
      SQL.Clear;
-     SQL.Add('SELECT Nota, DataMovim, ValorTotal,Loja, Cliente FROM SfcPedidoVenda WHERE (1 = 1)');
+     SQL.Add('SELECT Nota, DataMovim, ValorTotal, Cliente FROM SfcPedidoVenda WHERE (1 = 1)');
 
      // Filtro por número de notas
      if Nota <> '' then
@@ -155,20 +151,13 @@ begin
        Parameters.ParamByName('Nota').Value := '%' + Nota + '%';
      end;
 
-     // Filtro por nome do cliente
-     if Cliente <> '' then
-     begin
-       SQL.Add('AND Cliente LIKE :Cliente');
-       Parameters.ParamByName('Cliente').Value := '%' + Cliente + '%';
-     end;
-
      // Filtro por intervalo de datas
-     if (DataInicio > 0) and (DataFim > 0) then
-     begin
-       SQL.Add('AND DataMovim BETWEEN :DataInicio AND :DataFim');
-       Parameters.ParamByName('DataInicio').Value := DataInicio;
-       Parameters.ParamByName('DataFim').Value := DataFim;
-     end;
+      if (DataInicio > 0) and (DataFim > 0) then
+    begin
+      SQL.Add('AND DataMovim BETWEEN :DataInicio AND :DataFim');
+      Parameters.ParamByName('DataInicio').Value := DataInicio;
+      Parameters.ParamByName('DataFim').Value := DataFim;
+    end;
 
      open;
    end;
