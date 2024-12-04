@@ -131,7 +131,7 @@ begin
   DataInicio := CalendarPickerInicio.Date;
   DataFim := CalendarPickerFim.Date;
 
-   if (DataInicio > 0) and (DataFim > 0) and (DataInicio > DataFim) then
+   if DataInicio > DataFim then
     begin
       ShowMessage('O intervalo de datas está incorreto. A data inicial não pode ser maior que a data final.');
       Exit;

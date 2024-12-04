@@ -160,9 +160,9 @@ object Form1: TForm1
     object BtnConsultar: TBitBtn
       Left = 599
       Top = 24
-      Width = 153
+      Width = 145
       Height = 59
-      Caption = ' Consultar (F2)'
+      Caption = 'Consultar (F2)'
       Glyph.Data = {
         36090000424D3609000000000000360000002800000018000000180000000100
         20000000000000090000C40E0000C40E00000000000000000000000000000000

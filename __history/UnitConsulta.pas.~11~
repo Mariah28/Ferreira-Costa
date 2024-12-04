@@ -30,6 +30,9 @@ type
     Label8: TLabel;
     CalendarPickerInicio: TCalendarPicker;
     CalendarPickerFim: TCalendarPicker;
+    ADOMasterNota: TWideStringField;
+    ADOMasterDataMovim: TDateField;
+    ADOMasterValorTotal: TBCDField;
     ADOItensCodigo: TAutoIncField;
     ADOItensProduto: TWideStringField;
     ADOItensDescricao: TWideStringField;
@@ -41,10 +44,6 @@ type
     BtnLimpar: TBitBtn;
     BtnConsultar: TBitBtn;
     BtnCancelar: TBitBtn;
-    ADOMasterNota: TWideStringField;
-    ADOMasterDataMovim: TDateField;
-    ADOMasterValorTotal: TBCDField;
-    ADOMasterCliente: TWideStringField;
     procedure ConsultarClick(Sender: TObject);
     procedure CarregarItens(Sender: TObject; Field: TField);
     procedure FormCreate(Sender: TObject);
@@ -131,7 +130,7 @@ begin
   DataInicio := CalendarPickerInicio.Date;
   DataFim := CalendarPickerFim.Date;
 
-   if (DataInicio > 0) and (DataFim > 0) and (DataInicio > DataFim) then
+   if DataInicio > DataFim then
     begin
       ShowMessage('O intervalo de datas está incorreto. A data inicial não pode ser maior que a data final.');
       Exit;
@@ -142,7 +141,7 @@ begin
    begin
      Close;
      SQL.Clear;
-     SQL.Add('SELECT Nota, DataMovim, ValorTotal, Cliente FROM SfcPedidoVenda WHERE (1 = 1)');
+     SQL.Add('SELECT Nota, DataMovim, ValorTotal FROM SfcPedidoVenda WHERE (1 = 1)');
 
      // Filtro por número de notas
      if Nota <> '' then

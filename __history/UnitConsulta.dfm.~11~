@@ -26,7 +26,9 @@ object Form1: TForm1
     Color = clRed
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 1107
+    ExplicitLeft = -152
+    ExplicitTop = 129
+    ExplicitWidth = 1089
     object Label2: TLabel
       Left = 22
       Top = 8
@@ -160,9 +162,9 @@ object Form1: TForm1
     object BtnConsultar: TBitBtn
       Left = 599
       Top = 24
-      Width = 153
+      Width = 145
       Height = 59
-      Caption = ' Consultar (F2)'
+      Caption = 'Consultar (F2)'
       Glyph.Data = {
         36090000424D3609000000000000360000002800000018000000180000000100
         20000000000000090000C40E0000C40E00000000000000000000000000000000
@@ -335,7 +337,8 @@ object Form1: TForm1
     Color = clRed
     ParentBackground = False
     TabOrder = 1
-    ExplicitWidth = 1107
+    ExplicitTop = 2
+    ExplicitWidth = 1089
     object Label11: TLabel
       Left = 745
       Top = 35
@@ -485,25 +488,21 @@ object Form1: TForm1
       item
         Expanded = False
         FieldName = 'Nota'
+        Width = 101
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'DataMovim'
         Title.Caption = 'Data'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'Cliente'
-        Width = 307
+        Width = 138
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'ValorTotal'
         Title.Caption = 'Valor Total'
-        Width = 122
+        Width = 155
         Visible = True
       end>
   end
@@ -623,8 +622,7 @@ object Form1: TForm1
       'SELECT '
       '    Nota,'
       '    DataMovim,'
-      '    ValorTotal,'
-      '    Cliente'
+      '    ValorTotal'
       'FROM '
       '    SfcPedidoVenda'
       'WHERE'
@@ -645,10 +643,6 @@ object Form1: TForm1
       FieldName = 'ValorTotal'
       Precision = 12
       Size = 2
-    end
-    object ADOMasterCliente: TWideStringField
-      FieldName = 'Cliente'
-      Size = 255
     end
   end
   object DSItens: TDataSource
